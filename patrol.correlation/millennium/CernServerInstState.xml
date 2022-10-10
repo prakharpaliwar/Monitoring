@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<correlationRule name="Global Server Instance State" version="8" xmlns="esm:correlationRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:correlationRule http://repo.esm.cerner.corp/schema/correlationRule.xsd">
+    <entryCriteria conjunctive="AND" trigger="Server_Instance_State_Stopping" joinAttribute="CLIENT,ENTERPRISE,DOMAIN,NODE,PROCESSID">
+        <expr eventName="Server_Instance_State_Stopping" requiredMatches="3" windowDuration="3" comparator="GTE"/>
+        <expr eventName="Server_Activity_OpsJob" requiredMatches="0" windowDuration="1" comparator="LTE"/>
+    </entryCriteria>
+    <entryCriteria conjunctive="OR">
+        <expr eventName="Server_Instance_State_Starting" requiredMatches="3" windowDuration="3" comparator="GTE"/>
+    </entryCriteria>
+    <actionChoice>
+        <ircAction paramName="CernServerInstState" mcObject="${domain}: ${serverid} - ${name}" mcParameterValue="${lhspart}"/>
+        <!--<emailAction alias="EmailSample" message="Consecutive Alerts happen on domain" toField="sample1@sample.com,sample2@sample.com"/>-->
+    </actionChoice>
+</correlationRule>

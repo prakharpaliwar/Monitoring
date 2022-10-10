@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventRule name="SWITCHED_ACTIVE_DRIVE_ALERT" version="2" source="SECUREPATH_DRIVES" xmlns="esm:eventRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:eventRule http://repo.esm.cerner.corp/schema/eventRule.xsd">
+    <monitoringEvent name="SWITCHED_ACTIVE_DRIVE" conjunctive="UNARY">
+        <container conjunctive="OR">      
+            <predicate name="used space in gb" oper="NEQ" type="STRING">
+			          <lhspart>
+				            <attrDefinition name="ACTIVE_DRIVE" func="PIT" countIterations="0" />
+			          </lhspart>
+			          <rhspart>
+				            <attrDefinition name="ACTIVE_DRIVE" func="PIT" countIterations="1" />
+			          </rhspart>
+		        </predicate>
+        </container>		
+    </monitoringEvent>
+</eventRule>

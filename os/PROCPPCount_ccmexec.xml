@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventRule name="CCMEXEC_INSTALLED" version="2" source="CCMEXEC_PROCESS_COUNT" xmlns="esm:eventRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:eventRule http://repo.esm.cerner.corp/schema/eventRule.xsd">
+    <monitoringEvent name="CCMEXEC_INSTALLED" conjunctive="AND">
+        <container conjunctive="OR">
+            <predicate name="SMS Agent host service ccmexec" oper="EQ" type="STRING">
+                <lhspart>
+                    <attrDefinition name="STATUS" countIterations="0" func="PIT" />
+                </lhspart>
+                <rhspart>
+                    <literal>SERVICE_NOT_RUNNING</literal>
+                </rhspart>
+            </predicate>
+	    <predicate name="SMS Agent host service ccmexec" oper="EQ" type="STRING">
+                <lhspart>
+                    <attrDefinition name="STATUS" countIterations="0" func="PIT" />
+                </lhspart>
+                <rhspart>
+                    <literal>SERVICE_NEVER_RAN</literal>
+                </rhspart>
+            </predicate>
+        </container>
+    </monitoringEvent>
+</eventRule>

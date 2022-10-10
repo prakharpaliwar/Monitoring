@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventRule name="Global Server Instance State - Stopping" version="13" source="MID_SERVER_INSTANCES" xmlns="esm:eventRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:eventRule http://repo.esm.cerner.corp/schema/eventRule.xsd">
+    <monitoringEvent name="Server_Instance_State_Stopping_MEDC_DE" conjunctive="UNARY">
+        <container conjunctive="AND">
+            <predicate name="Literal Condition for Server Instance State Stopping - MEDC_DE" oper="EQ" type="STRING">
+                <lhspart>
+                    <attrDefinition name="STATE" func="PIT" countIterations="0"/>
+                </lhspart>
+                <rhspart>
+                    <literal>Stopping</literal>
+                </rhspart>
+            </predicate>
+        </container>
+        <filter key="CLIENT" mode="OVERRIDE">
+            <include>MEDC_DE</include>
+        </filter>
+        <filter key="CLIENT,NODE" mode="OVERRIDE">
+            <tag>
+                <tagInclude type="ISPROD">1</tagInclude>
+            </tag>
+        </filter>
+        <filter key="ENTRYID" mode="OVERRIDE">
+            <exclude>56</exclude>
+            <exclude>105</exclude>
+            <exclude>108</exclude>
+        </filter>
+    </monitoringEvent>
+    <monitoringEvent name="Server_Instance_State_Stopping_105" conjunctive="UNARY">
+        <container conjunctive="AND">
+            <predicate name="Literal Condition for Server Instance State Stopping - 105" oper="EQ" type="STRING">
+                <lhspart>
+                    <attrDefinition name="STATE" func="PIT" countIterations="0"/>
+                </lhspart>
+                <rhspart>
+                    <literal>Stopping</literal>
+                </rhspart>
+            </predicate>
+        </container>
+        <filter key="ENTRYID" mode="OVERRIDE">
+            <include>105</include>
+        </filter>
+    </monitoringEvent>
+    <monitoringEvent name="Server_Instance_State_Stopping_108" conjunctive="UNARY">
+        <container conjunctive="AND">
+            <predicate name="Literal Condition for Server Instance State Stopping - 108" oper="EQ" type="STRING">
+                <lhspart>
+                    <attrDefinition name="STATE" func="PIT" countIterations="0"/>
+                </lhspart>
+                <rhspart>
+                    <literal>Stopping</literal>
+                </rhspart>
+            </predicate>
+        </container>
+        <filter key="ENTRYID" mode="OVERRIDE">
+            <include>108</include>
+        </filter>
+    </monitoringEvent>
+    <monitoringEvent name="Server_Instance_State_Stopping" conjunctive="UNARY">
+        <container conjunctive="AND">
+            <predicate name="Literal Condition for Server Instance State Stopping" oper="EQ" type="STRING">
+                <lhspart>
+                    <attrDefinition name="STATE" func="PIT" countIterations="0"/>
+                </lhspart>
+                <rhspart>
+                    <literal>Stopping</literal>
+                </rhspart>
+            </predicate>
+        </container>
+        <filter key="ENTRYID" mode="OVERRIDE">
+            <exclude>105</exclude>
+            <exclude>108</exclude>
+        </filter>
+    </monitoringEvent>
+    <filter key="NODE">
+        <exclude>LACCA724APP*</exclude>
+        <exclude>RUTLVTAPP4*</exclude>
+    </filter>
+    <filter key="DOMAIN,NAME">
+        <exclude>B1946/OP_*</exclude> <!-- BAPT_FL -->
+        <exclude>C1946/OP_*</exclude> <!-- BAPT_FL -->
+        <exclude>E1946/OP_*</exclude> <!-- BAPT_FL -->
+        <exclude>M1946/OP_*</exclude> <!-- BAPT_FL -->
+        <exclude>T1946/OP_*</exclude> <!-- BAPT_FL -->
+        <exclude>P197/CONV_Epic_Pat_Hist_Out2</exclude>
+        <exclude>P197/CONV_Epic_Pat_Hist_Disk4</exclude>
+        <exclude>P197/CONV_Epic_Pat_Hist_Disk2</exclude>
+        <exclude>P197/CONV_Epic_Pat_Hist_Disk3</exclude>
+        <exclude>P197/CONV_Epic_Pat_Hist3_Out</exclude>
+        <exclude>P197/CONV_Epic_Pat_Hist2_Out</exclude>
+        <exclude>P197/CONV_Epic_Pat_Hist_Disk</exclude>
+        <exclude>P197/CONV_Epic_Pat_Hist_Out</exclude>
+        <exclude>P197/OP_HX*</exclude>
+    </filter>
+    <filter key="CLIENT,NAME">
+        <exclude>AHSW_CA/CPM SCRIPT BATCH</exclude>
+        <exclude>CERN_RWX/CPM SCRIPT BATCH</exclude>
+        <exclude>EAST_ME/CPM SCRIPT BATCH</exclude>
+    </filter>
+    <filter key="CLIENT">
+        <exclude>CERN_COMC</exclude>
+        <exclude>CERN_COMF</exclude>
+        <exclude>CERN_COMG</exclude>
+        <exclude>CERN_COMH</exclude>
+        <exclude>CERN_COMI</exclude> <!-- ESMDEPLOY-7455 -->
+        <exclude>CVHA_KS</exclude>
+    </filter>
+    <filter key="CLIENT,NODE">
+        <tag>
+            <tagInclude type="STATUS">DEPLOYED</tagInclude>
+        </tag>
+    </filter>
+</eventRule>

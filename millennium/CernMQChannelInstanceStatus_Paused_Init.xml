@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventRule name="Global MQ Channel Instance Status - Paused / Initializing" version="4" source="QUE_MQ_CHANNEL_STATUS" xmlns="esm:eventRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:eventRule http://repo.esm.cerner.corp/schema/eventRule.xsd">
+    <monitoringEvent name="MQ_Channel_Instance_Status_Paused_Initializing" conjunctive="UNARY">
+        <container conjunctive="OR">
+            <predicate name="Literal Condition for MQ Channel Instance Status Paused" oper="EQ" type="NUMBER">
+                <lhspart>
+                    <attrDefinition name="STATUS_VALUE" func="PIT" countIterations="0"/>
+                </lhspart>
+                <rhspart>
+                    <literal>8</literal>
+                </rhspart>
+            </predicate>
+            <predicate name="Literal Condition for MQ Channel Instance Status Initializing" oper="EQ" type="NUMBER">
+                <lhspart>
+                    <attrDefinition name="STATUS_VALUE" func="PIT" countIterations="0"/>
+                </lhspart>
+                <rhspart>
+                    <literal>9</literal>
+                </rhspart>
+            </predicate>
+        </container>
+    </monitoringEvent>
+    <filter key="NODE">
+        <exclude>LACCA724APP*</exclude>
+        <exclude>RUTLVTAPP4*</exclude>
+    </filter>
+    <filter key="CLIENT,NODE">
+        <tag>
+            <tagInclude type="STATUS">DEPLOYED</tagInclude>
+        </tag>
+    </filter>
+</eventRule>

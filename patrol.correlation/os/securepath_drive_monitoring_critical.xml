@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<correlationRule name="SECUREPATH_DRIVE_SPACE_CRITICAL" version="2" xmlns="esm:correlationRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:correlationRule http://repo.esm.cerner.corp/schema/correlationRule.xsd">
+    <entryCriteria conjunctive="OR" actionID="MAJOR">
+        <expr eventName="SECUREPATH_DRIVE_SPACE_CRITICAL" requiredMatches="10" windowDuration="20" comparator="GTE"/>
+    </entryCriteria>
+    <exitCriteria conjunctive="OR" actionID="MAJOR">
+        <expr eventName="SECUREPATH_DRIVE_SPACE_CRITICAL" requiredMatches="0" windowDuration="10" comparator="LTE"/>
+        <expr eventName="SWITCHED_ACTIVE_DRIVES" requiredMatches="0" windowDuration="1" comparator="LTE"/>
+    </exitCriteria>
+	<actionChoice ID="MAJOR">
+        <ircAction paramName="SECUREPATH_ACTIVE_DRIVE_SPACE" mcObject="${ACTIVE_DRIVE}" mcParameterValue="${lhspart}" alertSev="MAJOR" reAlarmIntervalMin="30"/>
+    </actionChoice>
+</correlationRule>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<correlationRule name="Global Citrix Total Session Count" version="5" xmlns="esm:correlationRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:correlationRule http://repo.esm.cerner.corp/schema/correlationRule.xsd">
+    <entryCriteria conjunctive="AND">
+        <expr eventName="Ctx_Total_Session_Count" requiredMatches="1" windowDuration="1" comparator="GTE"/>
+    </entryCriteria>
+    <exitCriteria conjunctive="AND">
+        <expr eventName="Ctx_Total_Session_Count" requiredMatches="0" windowDuration="1" comparator="LTE"/>
+    </exitCriteria>
+    <actionChoice>
+        <ircAction paramName="CtxTotalSessions" mcObject="CITRIX_SESSIONS" mcParameterValue="${lhspart}" reAlarmIntervalMin="30"/>
+        <!--<emailAction alias="EmailSample" message="Consecutive Alerts happen on node" toField="sample1@sample.com,sample2@sample.com"/>-->
+    </actionChoice>
+</correlationRule>

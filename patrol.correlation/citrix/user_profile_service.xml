@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<correlationRule name="Global Windows Event Log - User profile Service" version="1" xmlns="esm:correlationRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:correlationRule http://repo.esm.cerner.corp/schema/correlationRule.xsd">
+    <entryCriteria conjunctive="AND">
+        <expr eventName="Windows_Event_Log_USER_PROFILE_SERVICE" requiredMatches="2" windowDuration="2" comparator="GTE"/>
+    </entryCriteria>
+ 
+    <actionChoice>
+        <ircAction paramName="WINDOWS_EVENTID_1500" mcObject="User profile Service" reAlarmIntervalMin="30"/>
+        <!--<emailAction alias="EmailSample" message="Consecutive Alerts happen on node" toField="sample1@sample.com,sample2@sample.com"/>-->
+    </actionChoice>
+</correlationRule>

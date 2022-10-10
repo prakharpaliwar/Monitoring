@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventRule name="WINDOWS_SERVICES_HUNG" version="1" source="SELF_HEALING_EXECUTION" ruleType="group" ruleSubType="absent" xmlns="esm:eventRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:eventRule http://repo.esm.cerner.corp/schema/eventRule.xsd">
+    <monitoringEvent name="WINDOWS_SERVICES_HUNG_STOPPING" conjunctive="UNARY">
+        <container conjunctive="UNARY">      
+            <predicate name="Alert when service is hung in stopping" oper="EQ" type="STRING">
+                <lhspart>
+                    <attrDefinition name="ERROR" countIterations="0" groupByAttributes="SCRIPT_NAME,TARGET" func="PIT" />
+                </lhspart>
+                <rhspart>
+                    <literal>3</literal>
+                </rhspart>
+            </predicate>          			
+        </container>		
+    </monitoringEvent>
+    <filter key="SCRIPT_NAME">
+	<include>WINDOWS_SERVICES_MONITORING_CWX</include>
+    </filter>
+    <filter key="TARGET">
+	<exclude>Background Intelligent Transfer Service</exclude>
+	<exclude>Downloaded Maps Manager</exclude>
+	<exclude>Windows Update</exclude>
+	<exclude>McAfee Agent Common Services</exclude>
+	<exclude>McAfee McShield</exclude>
+	<exclude>McAfee Task Manager</exclude>
+	<exclude>NetBackup Bare Metal Restore Boot Server</exclude>
+	<exclude>Snare</exclude>
+   </filter>
+   <filter key="CLIENT">
+	<exclude>MLV_*</exclude>
+   </filter>
+   <filter key="TARGET,NODE">
+	<exclude>File Replication/VERSWICTX21*</exclude>
+	<exclude>File Replication/VERSWICTX23*</exclude>
+	<exclude>File Replication/VERSWICTX24*</exclude>
+	<exclude>File Replication/VERSWICTX25*</exclude>
+	<exclude>MonitorIT Agent Service/RGMHWIGMCTX06*</exclude>
+	<exclude>PSFTPRCSDOMAINFNM298SERVICE/MHGMSPSFT02*</exclude>
+	<exclude>File Replication/EMOSIFRSQL01*</exclude>
+	<exclude>RRD SECURE EMAIL SERVICE/UNIVTNRRD13*</exclude>
+	<exclude>MCAFEE AGENT BACKWARDS COMPATIBILITY SERVICE/STLUOHBO07*</exclude>
+	<exclude>File Replication/QEMRAUSQL01*</exclude>
+	<exclude>File Replication/MEDCDEXDC02*</exclude>
+   </filter>
+   <filter key="TARGET,CLIENT">
+	<exclude>SSO Manager Host/BHS_FL</exclude>
+   </filter>
+</eventRule>

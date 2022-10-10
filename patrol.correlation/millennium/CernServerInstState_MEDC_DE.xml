@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<correlationRule name="Global Server Instance State" version="6" xmlns="esm:correlationRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:correlationRule http://repo.esm.cerner.corp/schema/correlationRule.xsd">
+    <entryCriteria conjunctive="OR">
+        <expr eventName="Server_Instance_State_Stopping_MEDC_DE" requiredMatches="24" windowDuration="24" comparator="GTE"/>
+    </entryCriteria>
+    <actionChoice>
+        <ircAction paramName="CernServerInstState" mcObject="${domain}: ${serverid} - ${name}" mcParameterValue="${lhspart}"/>
+        <!--<emailAction alias="EmailSample" message="Consecutive Alerts happen on domain" toField="sample1@sample.com,sample2@sample.com"/>-->
+    </actionChoice>
+</correlationRule>

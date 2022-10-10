@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventRule name="SECUREPATH_DRIVE_SPACE_CRITICAL" version="4" source="SECUREPATH_DRIVES" xmlns="esm:eventRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:eventRule http://repo.esm.cerner.corp/schema/eventRule.xsd">
+    <monitoringEvent name="SECUREPATH_DRIVE_SPACE_CRITICAL" conjunctive="UNARY">
+        <container conjunctive="AND">
+            <predicate name="used space in gb" oper="LTE" type="NUMBER" format="##.##">
+                <lhspart>
+                    <mathFunction name="space in gb" params="used,total" expr="(total-used)/1073741824"/>
+		    <!-- 1073741824 = 1024*1024*1024-->
+                </lhspart>
+                <rhspart>
+                    <literal>10</literal>
+                </rhspart>
+            </predicate>
+        </container>
+    </monitoringEvent>	
+
+    <contextDefinition alias="used" name="USEDSPACE" func="PIT" countIterations="0"/>
+    <contextDefinition alias="total" name="TOTALCAPACITY" func="PIT" countIterations="0"/>
+    <filter key="CLIENT">
+        <exclude>DTRT_MI</exclude>
+	<exclude>LCOX_MO</exclude>
+	<exclude>TMMC_FL</exclude>
+    </filter>
+</eventRule>

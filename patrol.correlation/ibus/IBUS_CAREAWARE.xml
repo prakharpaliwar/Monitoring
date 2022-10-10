@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<correlationRule name="IBUS_CAREAWARE_MONITORING" version="1" xmlns="esm:correlationRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:correlationRule http://repo.esm.cerner.corp/schema/correlationRule.xsd">
+    <entryCriteria conjunctive="OR" actionID="EXPIRED_PASSWORD">
+        <expr eventName="PARAMETER_CAEXPIRED_PASSWORD" requiredMatches="1" windowDuration="1" comparator="EQ"/>
+    </entryCriteria>
+	
+	<entryCriteria conjunctive="OR" actionID="INVALIDDATABASESID">
+        <expr eventName="PARAMETER_CAINVALIDDATABASESID" requiredMatches="1" windowDuration="1" comparator="EQ"/>
+    </entryCriteria>
+	
+	<entryCriteria conjunctive="OR" actionID="InvalidDatabaseCredentials">
+        <expr eventName="PARAMETER_CAInvalidDatabaseCredentials" requiredMatches="1" windowDuration="1" comparator="EQ"/>
+    </entryCriteria>
+	
+	<entryCriteria conjunctive="OR" actionID="JavaMemoryCrash">
+        <expr eventName="PARAMETER_CAJavaMemoryCrash" requiredMatches="1" windowDuration="1" comparator="EQ"/>
+    </entryCriteria>
+	
+	<exitCriteria conjunctive="OR" actionID="EXPIRED_PASSWORD">
+        <expr eventName="PARAMETER_CAEXPIRED_PASSWORD" requiredMatches="0" windowDuration="1" comparator="NEQ"/>
+    </exitCriteria>
+	
+	<exitCriteria conjunctive="OR" actionID="INVALIDDATABASESID">
+        <expr eventName="PARAMETER_CAINVALIDDATABASESID" requiredMatches="0" windowDuration="1" comparator="NEQ"/>
+    </exitCriteria>
+	
+	<exitCriteria conjunctive="OR" actionID="InvalidDatabaseCredentials">
+        <expr eventName="PARAMETER_CAInvalidDatabaseCredentials" requiredMatches="0" windowDuration="1" comparator="NEQ"/>
+    </exitCriteria>
+	
+    <exitCriteria conjunctive="OR" actionID="JavaMemoryCrash">
+        <expr eventName="PARAMETER_CAJavaMemoryCrash" requiredMatches="0" windowDuration="1" comparator="NEQ"/>
+    </exitCriteria>
+	
+     <actionChoice ID="EXPIRED_PASSWORD">
+	<ircAction paramName="CAEXPIRED_PASSWORD" reAlarmIntervalMin="30">
+   	    <ircAttribute name="mc_parameter_value" value="1"/>
+		<ircAttribute name="mc_host" value="${NODE}"/>
+	    <ircAttribute name="mc_object" value="${VALUE_STR}"/>
+        </ircAction>
+    </actionChoice>
+	
+	 <actionChoice ID="INVALIDDATABASESID">
+	<ircAction paramName="CAINVALIDDATABASESID" reAlarmIntervalMin="30">
+   	    <ircAttribute name="mc_parameter_value" value="1"/>
+		<ircAttribute name="mc_host" value="${NODE}"/>
+	    <ircAttribute name="mc_object" value="${VALUE_STR}"/>
+        </ircAction>
+    </actionChoice>
+	
+	 <actionChoice ID="InvalidDatabaseCredentials">
+	<ircAction paramName="CAInvalidDatabaseCredentials" reAlarmIntervalMin="30">
+   	    <ircAttribute name="mc_parameter_value" value="1"/>
+		<ircAttribute name="mc_host" value="${NODE}"/>
+	    <ircAttribute name="mc_object" value="${VALUE_STR}"/>
+        </ircAction>
+    </actionChoice>
+	
+	 <actionChoice ID="JavaMemoryCrash">
+	<ircAction paramName="CAJavaMemoryCrash" reAlarmIntervalMin="30">
+	    <ircAttribute name="mc_parameter_value" value="1"/>
+		<ircAttribute name="mc_host" value="${NODE}"/>
+	    <ircAttribute name="mc_object" value="${VALUE_STR}"/>
+        </ircAction>
+    </actionChoice>
+	
+</correlationRule>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventRule name="Global Citrix Total Session Count" version="8" source="CITRIX_SESSIONS" ruleType="group" xmlns="esm:eventRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:eventRule http://repo.esm.cerner.corp/schema/eventRule.xsd">
+    <monitoringEvent name="Ctx_Total_Session_Count" conjunctive="UNARY">
+        <container conjunctive="AND">
+            <predicate name="Literal Condition for Citrix Total Session Count" oper="GT" type="NUMBER">
+                <lhspart>
+                    <attrDefinition name="TOTALSESSIONS" func="COUNT" groupByAttributes="ENTERPRISE" countIterations="0" />
+                </lhspart>
+                <rhspart>
+                    <literal>110</literal>
+                </rhspart>
+            </predicate>
+        </container>
+        <filter key="NODE">
+            <include>LOMACACTX35*</include>
+            <include>LOMACACTX31*</include>
+            <include>LOMACACTX33*</include>
+            <include>LOMACACTX37*</include>
+        </filter>
+    </monitoringEvent>
+    
+    <monitoringEvent name="Ctx_Total_Session_Count" conjunctive="UNARY">
+        <container conjunctive="AND">
+            <predicate name="Literal Condition for Citrix Total Session Count" oper="GT" type="NUMBER">
+                <lhspart>
+                    <attrDefinition name="TOTALSESSIONS" func="COUNT" groupByAttributes="ENTERPRISE" countIterations="0" />
+                </lhspart>
+                <rhspart>
+                    <literal>85</literal>
+                </rhspart>
+            </predicate>
+        </container>
+    </monitoringEvent>
+
+    <filter key="CLIENT,NODE">
+        <tag>
+            <tagInclude type="SERVER_TYPE">Citrix-PVS Target Server</tagInclude>
+            <tagInclude type="STATUS">DEPLOYED</tagInclude>
+        </tag>
+        <tag>
+            <tagInclude type="SERVER_TYPE">Citrix-Xenapp</tagInclude>
+            <tagInclude type="STATUS">DEPLOYED</tagInclude>
+        </tag>
+    </filter>
+</eventRule>

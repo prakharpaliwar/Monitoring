@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<correlationRule name="Global MQ Channel Instance Status" version="5" xmlns="esm:correlationRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:correlationRule http://repo.esm.cerner.corp/schema/correlationRule.xsd">
+    <entryCriteria conjunctive="OR">
+        <expr eventName="MQ_Channel_Instance_Status_Retrying" requiredMatches="20" windowDuration="20" comparator="GTE"/>
+        <expr eventName="MQ_Channel_Instance_Status_Paused_Initializing" requiredMatches="1" windowDuration="1" comparator="GTE"/>
+    </entryCriteria>
+    <exitCriteria conjunctive="AND">
+        <expr eventName="MQ_Channel_Instance_Status_Retrying" requiredMatches="19" windowDuration="20" comparator="LTE"/>
+        <expr eventName="MQ_Channel_Instance_Status_Paused_Initializing" requiredMatches="0" windowDuration="1" comparator="LTE"/>
+    </exitCriteria>
+    <actionChoice>
+        <ircAction paramName="CernMQChannelInstanceStatus" mcObject="1:${channel_name}-${connection_name}" mcParameterValue="${lhspart}" reAlarmIntervalMin="30"/>
+        <!--<emailAction alias="EmailSample" message="Consecutive Alerts happen on domain" toField="sample1@sample.com,sample2@sample.com"/>-->
+    </actionChoice>
+</correlationRule>

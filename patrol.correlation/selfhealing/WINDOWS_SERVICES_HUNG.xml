@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<correlationRule name="WINDOWS_SERVICES_HUNG" version="1" xmlns="esm:correlationRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:correlationRule http://repo.esm.cerner.corp/schema/correlationRule.xsd">
+    <entryCriteria conjunctive="AND">
+        <expr eventName="WINDOWS_SERVICES_HUNG_STARTING" requiredMatches="2" windowDuration="2" comparator="GTE"/>
+    </entryCriteria>
+	<entryCriteria conjunctive="AND">
+		<expr eventName="WINDOWS_SERVICES_HUNG_STOPPING" requiredMatches="2" windowDuration="2" comparator="GTE"/>
+	</entryCriteria>
+  <exitCriteria conjunctive="AND">
+      <expr eventName="WINDOWS_SERVICES_HUNG_STARTING" requiredMatches="0" windowDuration="1" comparator="LTE"/>
+      <expr eventName="WINDOWS_SERVICES_HUNG_STOPPING" requiredMatches="0" windowDuration="1" comparator="LTE"/>
+  </exitCriteria>
+  <actionChoice>
+      <ircAction paramName="ServiceStatus" mcObject="${target}" reAlarmIntervalMin="30"/>
+  </actionChoice>
+</correlationRule>

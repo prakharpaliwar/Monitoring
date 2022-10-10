@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventRule name="Global Server Activity" version="1" source="MID_SERVER_ACTIVITY" xmlns="esm:eventRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:eventRule http://repo.esm.cerner.corp/schema/eventRule.xsd">
+    <monitoringEvent name="Server_Activity_OpsJob" conjunctive="UNARY">
+        <container conjunctive="AND">
+            <predicate name="Literal Condition for APPNUMBER 4800" oper="EQ" type="NUMBER">
+                <lhspart>
+                    <attrDefinition name="APPNUMBER" func="PIT" countIterations="0"/>
+                </lhspart>
+                <rhspart>
+                    <literal>4800</literal>
+                </rhspart>
+            </predicate>
+        </container>
+    </monitoringEvent>
+
+    <filter key="CLIENT,NODE">
+        <tag>
+            <tagInclude type="STATUS">DEPLOYED</tagInclude>
+        </tag>
+    </filter>
+</eventRule>

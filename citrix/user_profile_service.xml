@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eventRule name="Global Windows Event Log - User profile Service" version="1" source="WINDOWS_EVENT_LOGS" ruleType="group" ruleSubType="absent" xmlns="esm:eventRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:eventRule http://repo.esm.cerner.corp/schema/eventRule.xsd">
+    <monitoringEvent name="Windows_Event_Log_USER_PROFILE_SERVICE" conjunctive="UNARY">
+        <container conjunctive="AND">
+            <predicate name="Literal Condition for Windows Event Log" oper="GT" type="NUMBER">
+                <lhspart>
+                    <attrDefinition name="QUERY_NAME" func="COUNT" groupByAttributes="QUERY_NAME" countIterations="0" />
+                </lhspart>
+                <rhspart>
+                    <literal>0</literal>
+                </rhspart>
+            </predicate>
+        </container>
+        <filter key="QUERY_NAME" mode="OVERRIDE">
+            <include>USER_PROFILE_SERVICE</include>
+        </filter>
+    </monitoringEvent>
+
+    <filter key="CLIENT,NODE">
+        <tag>
+            <tagInclude type="OS_NAME">WINDOWS</tagInclude>
+            <tagInclude type="STATUS">DEPLOYED</tagInclude>
+        </tag>
+    </filter>
+    <filter key="CLIENT">
+        <exclude>MLV_*</exclude>
+    </filter>
+</eventRule>

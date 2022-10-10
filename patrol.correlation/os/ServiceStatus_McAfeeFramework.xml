@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<correlationRule name="Global Windows Service Status - McAfeeFramework" version="3" xmlns="esm:correlationRule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="esm:correlationRule http://repo.esm.cerner.corp/schema/correlationRule.xsd">
+    <entryCriteria conjunctive="AND">
+        <expr eventName="Windows_Service_Status_McAfeeFramework" requiredMatches="7" windowDuration="7" comparator="GTE"/>
+    </entryCriteria>
+    <exitCriteria conjunctive="AND">
+        <expr eventName="Windows_Service_Status_McAfeeFramework" requiredMatches="6" windowDuration="7" comparator="LTE"/>
+    </exitCriteria>
+    <actionChoice>
+        <ircAction paramName="ServiceStatus" mcObject="${displayname}" reAlarmIntervalMin="30"/>
+        <!--<emailAction alias="EmailSample" message="Consecutive Alerts happen on node" toField="sample1@sample.com,sample2@sample.com"/>-->
+    </actionChoice>
+</correlationRule>
